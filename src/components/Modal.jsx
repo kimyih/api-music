@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Modal = ({ isOpen, onClose, onAddToPlaylist }) => {
+const Modal = ({ isOpen, onClose, results, onAddToPlaylist }) => {
     const [playlists, setPlaylists] = useState([]);
 
     useEffect(() => {
@@ -18,8 +18,8 @@ const Modal = ({ isOpen, onClose, onAddToPlaylist }) => {
         }
     }, [isOpen]);
 
-    const handleAddClick = (playlistId) => {
-        onAddToPlaylist(playlistId);
+    const handleAddClick = (playlistId, track) => {
+        onAddToPlaylist(playlistId, track);
         onClose();
     };
 
@@ -31,10 +31,21 @@ const Modal = ({ isOpen, onClose, onAddToPlaylist }) => {
                 <span className="close" onClick={onClose}>&times;</span>
                 <h2>플레이리스트 선택</h2>
                 <ul>
-                    {playlists.map((playlist) => (
-                        <li key={playlist.id}>
-                            {playlist.name}
-                            <button onClick={() => handleAddClick(playlist.id)}>추가</button>
+                    {results.map((result) => (
+                        <li key={result.id.videoId}>
+                            <img src={result.snippet.thumbnails.default.url} alt={result.snippet.title} />
+                            <div>
+                                <h3>{result.snippet.title}</h3>
+                                <p>{result.snippet.channelTitle}</p>
+                                <ul>
+                                    {playlists.map((playlist) => (
+                                        <li key={playlist.id}>
+                                            {playlist.name}
+                                            <button onClick={() => handleAddClick(playlist.id, result)}>추가</button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </li>
                     ))}
                 </ul>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcRating, FcPlus, FcApproval } from "react-icons/fc";
 import { IoMusicalNotes } from "react-icons/io5";
 
 const Header = () => {
+    const navigate = useNavigate();
     const [showInput, setShowInput] = useState(false);
     const [newItem, setNewItem] = useState('');
     const [playlistCount, setPlaylistCount] = useState(0);
@@ -84,10 +85,14 @@ const Header = () => {
         }
     };
 
+    const handlePlaylistClick = (playlistId) => {
+        navigate(`/playlist/${playlistId}`);
+    };
+
     return (
         <header id='header' role='banner'>
             <h1 className='logo'>
-                <Link to='/'><IoMusicalNotes />나의 뮤직 챠트</Link>
+                <Link to='/'><IoMusicalNotes />2y Chart</Link>
             </h1>
             <h2>chart</h2>
             <ul>
@@ -98,44 +103,48 @@ const Header = () => {
                 <li><Link to='chart/billboard'><span className='icon'></span>빌보드 챠트</Link></li>
             </ul>
             <h2>playlist</h2>
-            <ul>
-                <li><Link to='/mymusic'><span className='icon2'><FcRating /></span>Mymusic</Link></li>
-                {playlists.map((playlist) => (
-                    <li key={playlist.id}>
-                        {editingPlaylist === playlist.id ? (
+            <div className="playlist-container">
+                <ul>
+                    <li><Link to='/mymusic'><span className='icon2'><FcRating /></span>Mymusic</Link></li>
+                    {playlists.map((playlist) => (
+                        <li key={playlist.id}>
+                            {editingPlaylist === playlist.id ? (
+                                <div>
+                                    <input
+                                        type='text'
+                                        className='edit-input'
+                                        value={editingName}
+                                        onChange={handleEditingChange}
+                                    />
+                                    <button className='add-button' onClick={handleUpdateItem}>Update</button>
+                                </div>
+                            ) : (
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <span onClick={() => handlePlaylistClick(playlist.id)}>
+                                        <span className='icon2'><FcApproval /></span>{playlist.name}
+                                    </span>
+                                    <button className='edit-button' onClick={() => handleEditClick(playlist)}>Edit</button>
+                                    <button className='delete-button' onClick={() => handleDeleteClick(playlist.id)}>Delete</button>
+                                </div>
+                            )}
+                        </li>
+                    ))}
+                    <li>
+                        {showInput ? (
                             <div>
                                 <input
                                     type='text'
-                                    className='edit-input'
-                                    value={editingName}
-                                    onChange={handleEditingChange}
+                                    value={newItem}
+                                    onChange={handleInputChange}
                                 />
-                                <button className='add-button' onClick={handleUpdateItem}>Update</button>
+                                <button onClick={handleAddItem}>Add</button>
                             </div>
                         ) : (
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <Link to={`/playlist/${playlist.id}`}><span className='icon2'><FcApproval /></span>{playlist.name}</Link>
-                                <button className='edit-button' onClick={() => handleEditClick(playlist)}>Edit</button>
-                                <button className='delete-button' onClick={() => handleDeleteClick(playlist.id)}>Delete</button>
-                            </div>
+                            <Link to='#' onClick={handleAddClick}><span className='icon2'><FcPlus /></span>Create</Link>
                         )}
                     </li>
-                ))}
-                <li>
-                    {showInput ? (
-                        <div>
-                            <input
-                                type='text'
-                                value={newItem}
-                                onChange={handleInputChange}
-                            />
-                            <button onClick={handleAddItem}>Add</button>
-                        </div>
-                    ) : (
-                        <Link to='#' onClick={handleAddClick}><span className='icon2'><FcPlus /></span>Create</Link>
-                    )}
-                </li>
-            </ul>
+                </ul>
+            </div>
         </header>
     );
 }

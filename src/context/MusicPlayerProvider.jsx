@@ -50,17 +50,14 @@ const MusicPlayerProvider = ({ children }) => {
             nextTrack();
         }
     };
-
     // 재생 목록에 트랙을 추가하는 함수
     const addTrackToList = (track) => {
         setMusicData((prevMusicData) => [track, ...prevMusicData]);
     };
-
     // 재생 목록의 끝에 트랙을 추가하는 함수
     const addTrackToEnd = (track) => {
         setMusicData((prevMusicData) => [...prevMusicData, track]);
     };
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -68,7 +65,6 @@ const MusicPlayerProvider = ({ children }) => {
                 const data = await response.json();
                 setMusicData(data);
             } catch (error) {
-                console.log("1234")
                 console.error('데이터를 가져오는데 실패했습니다.', error);
             }
         };
@@ -76,27 +72,25 @@ const MusicPlayerProvider = ({ children }) => {
     }, []);
     return (
         <MusicPlayerContext.Provider value={{
-                musicData,
-                currentTrackIndex,
-                isPlaying,
-                played,
-                duration,
-                playTrack,
-                pauseTrack,
-                nextTrack,
-                prevTrack,
-                updatePlayed,
-                updateDuration,
-                toggleShuffle,
-                toggleRepeat,
-                handleTrackEnd,
-                isRepeating,
-                isShuffling,
-                addTrackToList,
-                addTrackToEnd,
-                
-
-            }}>
+            musicData,
+            currentTrackIndex,
+            isPlaying,
+            played,
+            duration,
+            playTrack,
+            pauseTrack,
+            nextTrack,
+            prevTrack,
+            updatePlayed,
+            updateDuration,
+            toggleShuffle,
+            toggleRepeat,
+            handleTrackEnd,
+            isRepeating,
+            isShuffling,
+            addTrackToList,
+            addTrackToEnd
+        }}>
             {children}
         </MusicPlayerContext.Provider>
     )
