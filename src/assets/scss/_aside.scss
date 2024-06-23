@@ -169,7 +169,7 @@
         h3 {
             text-align: center;
             font-size: 1.25rem;
-            font-family: var(--fontJ);
+            font-family: var(--fontP);
             font-weight: 300;
             margin-bottom: 10px;
             color: var(--black300);
@@ -218,7 +218,7 @@
                 }
 
                 &.current-track {
-                    background-color: var(--pointBg);
+                    background-color: #ff579249;
 
                     .img {
                         position: relative;
