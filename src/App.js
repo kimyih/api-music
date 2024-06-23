@@ -9,7 +9,7 @@ import Search from "./components/Search";
 import Home from "./pages/Home";
 import Mymusic from "./pages/Mymusic";
 import ChartList from "./pages/ChartList";
-// import PlayList from "./pages/PlayList";
+import PlayList from "./pages/PlayList";
 import MusicPlayerProvider from "./context/MusicPlayerProvider";
 
 const App = () => {
@@ -22,6 +22,7 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/mymusic" element={<Mymusic />} />
+                        <Route path="/playlist/:id" element={<PlayList />} />
                         <Route path="/chart/:id" element={<ChartList />} />
                         <Route path="/search/:id" element={<Search />} />
                     </Routes>
