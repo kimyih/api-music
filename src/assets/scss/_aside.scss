@@ -10,12 +10,12 @@
     .play-now {
         padding: 2rem;
         border-bottom: 1px solid var(--white200);
-        height: 490px;
+        height: 500px;
 
         h2 {
             text-align: center;
             font-size: 1.25rem;
-            font-family: var(--fontJ);
+            font-family: var(--fontP);
             font-weight: 300;
             margin-bottom: 10px;
             color: var(--black300);
@@ -95,13 +95,13 @@
 
             .shuffle.active {
                 svg {
-                    color: #7D57FF;
+                    color: #ff5792;
                 }
             }
 
             .repeat.active {
                 svg {
-                    color: #7D57FF;
+                    color: #ff5792;
                 }
             }
 
@@ -124,7 +124,7 @@
                 }
 
                 &.bg {
-                    background: linear-gradient(90deg, #5779FF 0%, #7E56FF 100%);
+                    background: linear-gradient(90deg, #f5ff68 0%, #ff46be 100%);
 
                     svg {
                         color: var(--white);
@@ -138,14 +138,25 @@
         }
 
         .volume {
-            text-align: center;
-            display: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+
+            svg {
+                margin-right: 8px;
+                color: #989898;
+            }
 
             input {
-                background: linear-gradient(90deg, #5779FF 0%, #7E56FF 100%);
-                height: 3px;
+                width: 250px;
+                -webkit-appearance: none;
+                appearance: none;
+                background-color: #ddd;
+                height: 5px;
                 border-radius: 5px;
-                accent-color: #5779FF;
+                outline: none;
+                background: linear-gradient(90deg, #a26cff 0%, #ff378a 100%);
             }
         }
     }

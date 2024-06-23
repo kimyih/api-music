@@ -111,7 +111,7 @@ const Chart = ({ title, showCalendar, selectedDate, onDateChange, minDate, maxDa
             </section>
             {youtubeResults.length > 0 && (
                 <section className='youtube-result'>
-                    <h3>:기술자::피부톤-2: :오른쪽을_가리키는_손_모양: "{selectedTitle}"에 대한 유튜브 검색 결과입니다.</h3>
+                    <h3>🔎 "{selectedTitle}"에 대한 유튜브 검색 결과입니다.</h3>
                     <ul>
                         {youtubeResults.map((result, index) => (
                             <li key={index}>
