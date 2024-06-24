@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { MusicPlayerContext } from '../context/MusicPlayerProvider';
-import { IoMusicalNotes, IoPlaySkipForward, IoPlaySkipBack, IoPlay, IoPause, IoRepeat, IoShuffleOutline, IoVolumeHigh } from 'react-icons/io5';
+import { IoMusicalNotes, IoPlaySkipForward, IoPlaySkipBack, IoPlay, IoPause, IoRepeat, IoShuffleOutline, IoTrash } from 'react-icons/io5';
 import ReactPlayer from 'react-player';
 
 const Aside = () => {
@@ -20,12 +20,16 @@ const Aside = () => {
         isShuffling,
         toggleRepeat,
         isRepeating,
-        handleTrackEnd
+        handleTrackEnd,
+        removeTrack,
+        volume,
+        setVolume
     } = useContext(MusicPlayerContext);
 
-    const [volume, setVolume] = useState(0.8); // 볼륨 상태 추가
     const currentTrackRef = useRef(null);
     const playerRef = useRef(null);
+
+    const [activeTrackIndex, setActiveTrackIndex] = useState(null);
 
     useEffect(() => {
         if (currentTrackRef.current) {
@@ -74,6 +78,24 @@ const Aside = () => {
         } else {
             handleTrackEnd();
         }
+    };
+
+    const handlePlayTrack = (event, index) => {
+        event.stopPropagation();
+        playTrack(index);
+    };
+
+    const handleRemoveTrack = (event, index) => {
+        event.stopPropagation();
+        removeTrack(index);
+    };
+
+    const handleMouseEnter = (index) => {
+        setActiveTrackIndex(index);
+    };
+
+    const handleMouseLeave = () => {
+        setActiveTrackIndex(null);
     };
 
     return (
@@ -141,14 +163,13 @@ const Aside = () => {
                         </span>
                     </div>
                     <div className="volume">
-                        <IoVolumeHigh />
-                        <input 
-                            type="range" 
-                            min="0" 
-                            max="1" 
-                            step="0.01" 
-                            value={volume} 
-                            onChange={handleVolumeChange} 
+                        <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={volume}
+                            onChange={handleVolumeChange}
                         />
                     </div>
                 </div>
@@ -161,11 +182,18 @@ const Aside = () => {
                         <li
                             key={index}
                             ref={index === currentTrackIndex ? currentTrackRef : null}
-                            onClick={() => playTrack(index)}
                             className={index === currentTrackIndex ? 'current-track' : ''}
+                            onMouseEnter={() => handleMouseEnter(index)}
+                            onMouseLeave={handleMouseLeave}
+                            onClick={(e) => handlePlayTrack(e, index)}
                         >
                             <span className="img" style={{ backgroundImage: `url(${track.imageURL})` }}></span>
                             <span className="title">{track.title}</span>
+                            {activeTrackIndex === index && (
+                                <span className="delete" onClick={(e) => handleRemoveTrack(e, index)}>
+                                    <IoTrash />
+                                </span>
+                            )}
                         </li>
                     ))}
                 </ul>

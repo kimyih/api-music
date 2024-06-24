@@ -107,7 +107,7 @@
 
             .play {}
 
-            >span {
+            > span {
                 display: inline-block;
                 width: 40px;
                 height: 40px;
@@ -182,7 +182,6 @@
         ul {
             li {
                 display: flex;
-                flex-wrap: wrap;
                 align-items: center;
                 justify-content: space-between;
                 margin-bottom: 10px;
@@ -202,7 +201,7 @@
                 }
 
                 .title {
-                    width: calc(100% - 80px);
+                    flex: 1;
                     max-height: 45px;
                     font-family: var(--fontJ);
                     font-weight: 300;
@@ -211,6 +210,19 @@
                     display: -webkit-box;
                     -webkit-line-clamp: 2;
                     -webkit-box-orient: vertical;
+                    margin-left: 10px;
+                }
+
+                .delete {
+                    cursor: pointer;
+                    color: #989898;
+                    display: flex;
+                    align-items: center;
+                    visibility: hidden;
+                }
+
+                &:hover .delete {
+                    visibility: visible;
                 }
 
                 &:hover {
@@ -238,7 +250,7 @@
                             content: '';
                             width: 20px;
                             height: 20px;
-                            background-image: url("data:image/svg+xml,%0A%3Csvg width='67' height='76' viewBox='0 0 67 76' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M64.5 33.6699C67.8333 35.5944 67.8333 40.4056 64.5 42.3301L7.5 75.2391C4.16666 77.1636 -3.70489e-06 74.758 -3.53664e-06 70.909L-6.5965e-07 5.09103C-4.91405e-07 1.24203 4.16667 -1.16359 7.5 0.760906L64.5 33.6699Z' fill='url(%23paint0_linear_891_99)'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_891_99' x1='-4.5' y1='38' x2='68.5' y2='38' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%235779FF'/%3E%3Cstop offset='1' stop-color='%237E56FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E%0A");
+                            background-image: url("data:image/svg+xml,%0A%3Csvg width='67' height='76' viewBox='0 0 67 76' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M64.5 33.6699C67.8333 35.5944 67.8333 40.4056 64.5 42.3301L7.5 75.2391C4.16666 77.1636 -3.70489e-06 74.758 -3.53664e-06 70.909L-6.5965e-07 5.09103C-4.91405e-07 1.24203 4.16667 -1.16359 7.5 0.760906L64.5 33.6699Z' fill='url(%23paint0_linear_891_99)'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_891_99' x1='-4.5' y1='38' x2='68.5' y2='38' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%235779FF'/%3E%3Cstop offset='1' stop-color='%237E56FF'/%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E%0A");
                             background-size: contain;
                             background-repeat: no-repeat;
                             position: absolute;

@@ -1,5 +1,7 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react';
+
 export const MusicPlayerContext = createContext();
+
 const MusicPlayerProvider = ({ children }) => {
     const [musicData, setMusicData] = useState([]);
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -8,14 +10,18 @@ const MusicPlayerProvider = ({ children }) => {
     const [duration, setDuration] = useState(0);
     const [isShuffling, setIsShuffling] = useState(false);
     const [isRepeating, setIsRepeating] = useState(false);
+    const [volume, setVolume] = useState(0.8); // 볼륨 상태 추가
+
     const playTrack = (index) => {
         setCurrentTrackIndex(index);
         setIsPlaying(true);
         setPlayed(0);
     };
+
     const pauseTrack = () => {
         setIsPlaying(false);
     };
+
     const nextTrack = () => {
         if (isShuffling) {
             setCurrentTrackIndex(Math.floor(Math.random() * musicData.length));
@@ -25,23 +31,29 @@ const MusicPlayerProvider = ({ children }) => {
         setIsPlaying(true);
         setPlayed(0);
     };
+
     const prevTrack = () => {
         setCurrentTrackIndex((prevIndex) => (prevIndex - 1 + musicData.length) % musicData.length);
         setIsPlaying(true);
         setPlayed(0);
     };
+
     const updatePlayed = (played) => {
         setPlayed(played);
     };
+
     const updateDuration = (duration) => {
         setDuration(duration);
     };
+
     const toggleShuffle = () => {
         setIsShuffling(!isShuffling);
     };
+
     const toggleRepeat = () => {
         setIsRepeating(!isRepeating);
     };
+
     const handleTrackEnd = () => {
         if (isRepeating) {
             setPlayed(0);
@@ -50,14 +62,36 @@ const MusicPlayerProvider = ({ children }) => {
             nextTrack();
         }
     };
+
     // 재생 목록에 트랙을 추가하는 함수
     const addTrackToList = (track) => {
         setMusicData((prevMusicData) => [track, ...prevMusicData]);
     };
+
     // 재생 목록의 끝에 트랙을 추가하는 함수
     const addTrackToEnd = (track) => {
         setMusicData((prevMusicData) => [...prevMusicData, track]);
     };
+
+    // 재생 목록에서 트랙을 삭제하는 함수
+    const removeTrack = (index) => {
+        setMusicData((prevMusicData) => prevMusicData.filter((_, i) => i !== index));
+        if (currentTrackIndex >= index && currentTrackIndex !== 0) {
+            setCurrentTrackIndex(currentTrackIndex - 1);
+        }
+    };
+
+    const setCurrentTrack = (track) => {
+        const trackIndex = musicData.findIndex(t => t.videoID === track.videoID);
+        if (trackIndex === -1) {
+            setMusicData((prev) => [track, ...prev]);
+            setCurrentTrackIndex(0);
+        } else {
+            setCurrentTrackIndex(trackIndex);
+        }
+        setIsPlaying(true);
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -70,6 +104,7 @@ const MusicPlayerProvider = ({ children }) => {
         };
         fetchData();
     }, []);
+
     return (
         <MusicPlayerContext.Provider value={{
             musicData,
@@ -89,10 +124,15 @@ const MusicPlayerProvider = ({ children }) => {
             isRepeating,
             isShuffling,
             addTrackToList,
-            addTrackToEnd
+            addTrackToEnd,
+            removeTrack,
+            setCurrentTrack,
+            volume,
+            setVolume // 볼륨 상태와 업데이트 함수 추가
         }}>
             {children}
         </MusicPlayerContext.Provider>
-    )
+    );
 }
-export default MusicPlayerProvider
+
+export default MusicPlayerProvider;
