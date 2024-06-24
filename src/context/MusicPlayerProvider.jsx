@@ -10,12 +10,21 @@ const MusicPlayerProvider = ({ children }) => {
     const [duration, setDuration] = useState(0);
     const [isShuffling, setIsShuffling] = useState(false);
     const [isRepeating, setIsRepeating] = useState(false);
-    const [volume, setVolume] = useState(0.8); // 볼륨 상태 추가
 
     const playTrack = (index) => {
         setCurrentTrackIndex(index);
         setIsPlaying(true);
         setPlayed(0);
+    };
+
+    const playTrackFromHome = (track) => {
+        setCurrentTrackIndex(0);
+        setIsPlaying(true);
+        setPlayed(0);
+    };
+
+    const addTrackToList = (track) => {
+        setMusicData((prevMusicData) => [track, ...prevMusicData]);
     };
 
     const pauseTrack = () => {
@@ -63,33 +72,8 @@ const MusicPlayerProvider = ({ children }) => {
         }
     };
 
-    // 재생 목록에 트랙을 추가하는 함수
-    const addTrackToList = (track) => {
-        setMusicData((prevMusicData) => [track, ...prevMusicData]);
-    };
-
-    // 재생 목록의 끝에 트랙을 추가하는 함수
-    const addTrackToEnd = (track) => {
-        setMusicData((prevMusicData) => [...prevMusicData, track]);
-    };
-
-    // 재생 목록에서 트랙을 삭제하는 함수
-    const removeTrack = (index) => {
+    const removeTrackFromList = (index) => {
         setMusicData((prevMusicData) => prevMusicData.filter((_, i) => i !== index));
-        if (currentTrackIndex >= index && currentTrackIndex !== 0) {
-            setCurrentTrackIndex(currentTrackIndex - 1);
-        }
-    };
-
-    const setCurrentTrack = (track) => {
-        const trackIndex = musicData.findIndex(t => t.videoID === track.videoID);
-        if (trackIndex === -1) {
-            setMusicData((prev) => [track, ...prev]);
-            setCurrentTrackIndex(0);
-        } else {
-            setCurrentTrackIndex(trackIndex);
-        }
-        setIsPlaying(true);
     };
 
     useEffect(() => {
@@ -113,6 +97,8 @@ const MusicPlayerProvider = ({ children }) => {
             played,
             duration,
             playTrack,
+            playTrackFromHome,
+            addTrackToList,
             pauseTrack,
             nextTrack,
             prevTrack,
@@ -123,16 +109,11 @@ const MusicPlayerProvider = ({ children }) => {
             handleTrackEnd,
             isRepeating,
             isShuffling,
-            addTrackToList,
-            addTrackToEnd,
-            removeTrack,
-            setCurrentTrack,
-            volume,
-            setVolume // 볼륨 상태와 업데이트 함수 추가
+            removeTrackFromList
         }}>
             {children}
         </MusicPlayerContext.Provider>
     );
-}
+};
 
 export default MusicPlayerProvider;
