@@ -3,14 +3,24 @@ import React, { createContext, useEffect, useState } from "react";
 export const MusicPlayerContext = createContext();
 
 const MusicPlayerProvider = ({ children }) => {
-  const [musicData, setMusicData] = useState([]);
+  const [musicData, setMusicData] = useState(() => {
+    // 로컬 스토리지에서 초기 값을 불러옴
+    const savedMusicData = localStorage.getItem("musicData");
+    return savedMusicData ? JSON.parse(savedMusicData) : [];
+  });
+
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [played, setPlayed] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isShuffling, setIsShuffling] = useState(false);
   const [isRepeating, setIsRepeating] = useState(false);
-  const [volume, setVolume] = useState(0.8); // 볼륨 상태 추가
+  const [volume, setVolume] = useState(0.5); // 볼륨 상태 추가
+
+  useEffect(() => {
+    // musicData가 변경될 때마다 로컬 스토리지에 저장
+    localStorage.setItem("musicData", JSON.stringify(musicData));
+  }, [musicData]);
 
   const playTrack = (index) => {
     setCurrentTrackIndex(index);
@@ -85,19 +95,6 @@ const MusicPlayerProvider = ({ children }) => {
     );
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/data/yih.json");
-        const data = await response.json();
-        setMusicData(data);
-      } catch (error) {
-        console.error("데이터를 가져오는데 실패했습니다.", error);
-      }
-    };
-    fetchData();
-  }, []);
-
   return (
     <MusicPlayerContext.Provider
       value={{
@@ -122,7 +119,7 @@ const MusicPlayerProvider = ({ children }) => {
         isShuffling,
         removeTrackFromList,
         volume,
-        setVolume, // 볼륨 업데이트 함수 제공
+        setVolume, // 볼륨 상태 제공
       }}
     >
       {children}
