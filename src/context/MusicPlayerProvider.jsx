@@ -10,6 +10,7 @@ const MusicPlayerProvider = ({ children }) => {
   const [duration, setDuration] = useState(0);
   const [isShuffling, setIsShuffling] = useState(false);
   const [isRepeating, setIsRepeating] = useState(false);
+  const [volume, setVolume] = useState(0.8); // 볼륨 상태 추가
 
   const playTrack = (index) => {
     setCurrentTrackIndex(index);
@@ -120,6 +121,8 @@ const MusicPlayerProvider = ({ children }) => {
         isRepeating,
         isShuffling,
         removeTrackFromList,
+        volume,
+        setVolume, // 볼륨 업데이트 함수 제공
       }}
     >
       {children}

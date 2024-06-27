@@ -14,6 +14,15 @@ const Playlist = () => {
     setPlaylist(storedPlaylist);
   }, [id]);
 
+  const handleRemoveTrack = (index) => {
+    const updatedPlaylist = {
+      ...playlist,
+      items: playlist.items.filter((_, i) => i !== index),
+    };
+    setPlaylist(updatedPlaylist);
+    localStorage.setItem(id, JSON.stringify(updatedPlaylist));
+  };
+
   return (
     <section id="playlist">
       {playlist.items.length > 0 ? (
@@ -21,6 +30,8 @@ const Playlist = () => {
           title={`${playlist.name} 리스트`}
           data={playlist.items}
           showCalendar={false}
+          onRemoveTrack={handleRemoveTrack}
+          isRemovable={true} // 삭제 버튼 활성화
         />
       ) : (
         <section className="music-chart">

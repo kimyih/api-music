@@ -3,13 +3,14 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
-// import "react-toastify/dist/react-toastify.css";
+import "react-toastify/dist/ReactToastify.css";
 import Modal from "./Modal";
 import { FcCalendar } from "react-icons/fc";
 import {
   MdFormatListBulletedAdd,
   MdOutlinePlayCircleFilled,
   MdClose,
+  MdDelete,
   MdHive,
 } from "react-icons/md";
 import { MusicPlayerContext } from "../context/MusicPlayerProvider";
@@ -29,6 +30,8 @@ const Chart = ({
   minDate,
   maxDate,
   data,
+  onRemoveTrack,
+  isRemovable, // 새로운 prop 추가
 }) => {
   const { addTrackToList, playTrack } = useContext(MusicPlayerContext);
   const [youtubeResults, setYoutubeResults] = useState([]);
@@ -116,13 +119,27 @@ const Chart = ({
         <div className="list">
           <ul>
             {data.map((item, index) => (
-              <li key={index} onClick={() => handleItemClick(item.title)}>
+              <li key={index}>
                 <span className="rank">#{item.rank}</span>
                 <span
                   className="img"
                   style={{ backgroundImage: `url(${item.imageURL})` }}
                 ></span>
-                <span className="title">{item.title}</span>
+                <span
+                  className="title"
+                  onClick={() => handleItemClick(item.title)}
+                >
+                  {item.title}
+                </span>
+                {isRemovable && (
+                  <span
+                    className="removeFromList"
+                    onClick={() => onRemoveTrack(index)}
+                  >
+                    <MdDelete />
+                    <span className="ir">리스트에서 삭제하기</span>
+                  </span>
+                )}
               </li>
             ))}
           </ul>

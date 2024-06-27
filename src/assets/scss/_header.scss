@@ -1,134 +1,280 @@
 #header {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 260px;
-    height: 100vh;
-    background-color: var(--white);
-    box-shadow: 0 0 10px var(--white200);
-    
-    h1 {
-        padding: 2rem 2rem 1rem 2rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 260px;
+  height: 100vh;
+  background-color: var(--white);
+  box-shadow: 0 0 10px var(--white200);
+  overflow: scroll;
 
-        a {
-            font-size: 30px;
-            font-weight: 900;
-            color: #7D57FF;
-        }
-    }
-    
-    h2 {
-        font-family: var(--fontJ);
-        font-size: 12px;
-        font-weight: 900;
-        color: var(--white400);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        padding: 2rem 2rem 1rem 2rem;
+  .logo {
+    display: flex;
+    text-align: center;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  h1 {
+    padding: 2rem 2rem 1rem 2rem;
+
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
     }
 
-    ul {
-        li {
-            color: var(--black500);
-            font-weight: 400;
-            font-size: 16px;
-            cursor: pointer;
-            padding: 16px 0;
-            border-left: 5px solid transparent;
-            font-weight: 900;
-
-            a {
-                display: block;
-            }
-
-            .icon {
-                width: 20px;
-                height: 20px;
-                background-size: 20px;
-                background-repeat: no-repeat;
-                display: inline-block;
-                margin-right: 14px;
-                vertical-align: -4px;
-                border-radius: 3px;
-                margin-left: 20px;
-            }
-
-            &:nth-child(1) .icon {
-                background-image: url(../img/icon-melon.jpg);
-            }
-
-            &:nth-child(2) .icon {
-                background-image: url(../img/icon-bugs.jpg);
-            }
-
-            &:nth-child(3) .icon {
-                background-image: url(../img/icon-apple.jpg);
-            }
-
-            &:nth-child(4) .icon {
-                background-image: url(../img/icon-genie.jpg);
-            }
-
-            &:nth-child(5) .icon {
-                background-image: url(../img/icon-bill.jpg);
-            }
-
-            &:hover {
-                background-color: #f5f5ff;
-            }
-
-            &.active {
-                border-left: 5px solid #7D57FF;
-                background-color: #f5f5ff;
-            }
-
-            .icon2 {
-                margin-left: 20px;
-                width: 20px;
-                height: 20px;
-                display: inline-block;
-                margin-right: 14px;
-
-                svg {
-                    vertical-align: -5px;
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-
-            .edit-input-container {
-                display: flex ; 
-                align-items: center ;
-                justify-content: center;
-                input {
-                    flex-grow: 1;
-                    padding: 10px ;
-                    font-size: 16px;
-                    margin-right: 10px;
-                }
-
-                .add-button {
-                    padding: 10px;
-                }
-            }
-        }
+    a {
+      font-size: 30px;
+      font-weight: 900;
+      color: #7d57ff;
     }
+  }
 
-    .edit-button, .delete-button {
-        margin-left: 8px;
-        background-color: #c3c3c3;
-        border: none;
-        color: white;
-        padding: 5px 10px;
-        text-align: center;
-        text-decoration: none;
+  h2 {
+    font-family: var(--fontJ);
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--white400);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 2rem 2rem 1rem 2rem;
+  }
+
+  ul {
+    li {
+      color: var(--black500);
+      font-weight: 400;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 16px 0;
+      border-left: 5px solid transparent;
+      font-weight: 900;
+
+      a {
+        display: block;
+      }
+
+      .icon {
+        width: 20px;
+        height: 20px;
+        background-size: 20px;
+        background-repeat: no-repeat;
         display: inline-block;
-        font-size: 14px;
-        border-radius: 30px;
-        cursor: pointer;
+        margin-right: 14px;
+        vertical-align: -4px;
+        border-radius: 3px;
+        margin-left: 20px;
+      }
+
+      &:nth-child(1) .icon {
+        background-image: url(../img/icon-melon.jpg);
+      }
+
+      &:nth-child(2) .icon {
+        background-image: url(../img/icon-bugs.jpg);
+      }
+
+      &:nth-child(3) .icon {
+        background-image: url(../img/icon-apple.jpg);
+      }
+
+      &:nth-child(4) .icon {
+        background-image: url(../img/icon-genie.jpg);
+      }
+
+      &:nth-child(5) .icon {
+        background-image: url(../img/icon-bill.jpg);
+      }
+
+      &:hover {
+        background-color: #f5f5ff;
+      }
+
+      &.active {
+        border-left: 5px solid #7d57ff;
+        background-color: #f5f5ff;
+      }
+
+      .icon2 {
+        margin-left: 20px;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        margin-right: 14px;
+
+        svg {
+          vertical-align: -5px;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .edit-input-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        input {
+          flex-grow: 1;
+          padding: 10px;
+          font-size: 16px;
+          margin-right: 10px;
+        }
+
+        .add-button {
+          padding: 10px;
+        }
+      }
+    }
+  }
+
+  .edit-button,
+  .delete-button {
+    margin-left: 8px;
+    background-color: #c3c3c3;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    svg {
+      vertical-align: middle;
+    }
+  }
+
+  .edit-button:hover,
+  .delete-button:hover {
+    background-color: var(--pointColor);
+  }
+}
+
+.Profile {
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  display: flex;
+
+  .profile__img {
+    width: 80%;
+    height: 250px;
+    object-position: center;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    object-fit: contain;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .edit-button:hover, .delete-button:hover {
-        background-color: var(--pointColor)
+    .profile-img-upload-label {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #7d57ff;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: none; /* 기본적으로 숨김 */
     }
+
+    &:hover .profile-img-upload-label {
+      display: block; /* hover 시 보이도록 */
+    }
+  }
+
+  .profile__name,
+  .profile__memo {
+    margin: 0 auto;
+    width: 80%;
+    margin-top: 10px;
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  }
+
+  .profile__name {
+    input {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--pointColor);
+    }
+  }
+
+  .profile__memo {
+    margin-top: 10px;
+
+    textarea {
+      font-size: 12px;
+      height: 50px;
+      resize: none;
+      color: #c3c3c3;
+    }
+  }
+}
+
+.edit-input {
+  margin: 0 auto;
+  width: 70%;
+  height: 36px;
+  margin: 4px;
+  background-color: #fff;
+  border: 1px solid;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+
+.add-button {
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+  width: 4rem;
+
+  &:hover {
+    background-color: var(--pointColor);
+    color: var(--white);
+  }
+}
+
+.create-btn {
+  width: 100%;
+
+  .create-input {
+    width: 70%;
+    height: 36px;
+    margin: 4px;
+    background-color: #fff;
+    border: 1px solid;
+    border-radius: 10px;
+  }
+
+  .create-add-btn {
+    width: 4rem;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--pointColor);
+      color: var(--white);
+    }
+  }
 }

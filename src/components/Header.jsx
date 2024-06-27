@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FcRating, FcPlus, FcApproval } from "react-icons/fc";
 import { IoMusicalNotes } from "react-icons/io5";
+import { FaEdit, FaTrash } from "react-icons/fa"; // 아이콘 추가
 
 const Header = () => {
   const navigate = useNavigate();
@@ -11,6 +12,17 @@ const Header = () => {
   const [playlists, setPlaylists] = useState([]);
   const [editingPlaylist, setEditingPlaylist] = useState(null);
   const [editingName, setEditingName] = useState("");
+
+  const [profileImg, setProfileImg] = useState(
+    localStorage.getItem("profileImg") ||
+      "https://i.pinimg.com/736x/d5/93/56/d593562ea65402e843590d8c1974126b.jpg"
+  );
+  const [profileName, setProfileName] = useState(
+    localStorage.getItem("profileName") || "김이현 ✨"
+  );
+  const [profileMemo, setProfileMemo] = useState(
+    localStorage.getItem("profileMemo") || "내가 좋아하는 음악들 🫧"
+  );
 
   useEffect(() => {
     const count = localStorage.getItem("playlistCount") || 0;
@@ -98,14 +110,61 @@ const Header = () => {
     navigate(`/playlist/${playlistId}`);
   };
 
+  const handleProfileImgChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setProfileImg(reader.result);
+        localStorage.setItem("profileImg", reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleProfileNameChange = (e) => {
+    setProfileName(e.target.value);
+    localStorage.setItem("profileName", e.target.value);
+  };
+
+  const handleProfileMemoChange = (e) => {
+    setProfileMemo(e.target.value);
+    localStorage.setItem("profileMemo", e.target.value);
+  };
+
   return (
     <header id="header" role="banner">
       <h1 className="logo">
-        <Link to="/">
-          <IoMusicalNotes />
-          2y Chart
-        </Link>
+        <Link to="/">2y Chart</Link>
       </h1>
+      <div className="Profile">
+        <div className="profile__img">
+          <img src={profileImg} alt="Profile" />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleProfileImgChange}
+            style={{ display: "none" }}
+            id="profile-img-upload"
+          />
+          <label
+            htmlFor="profile-img-upload"
+            className="profile-img-upload-label"
+          >
+            이미지 변경
+          </label>
+        </div>
+        <div className="profile__name">
+          <input
+            type="text"
+            value={profileName}
+            onChange={handleProfileNameChange}
+          />
+        </div>
+        <div className="profile__memo">
+          <textarea value={profileMemo} onChange={handleProfileMemoChange} />
+        </div>
+      </div>
       <h2>chart</h2>
       <ul>
         <li>
@@ -156,7 +215,7 @@ const Header = () => {
                     onChange={handleEditingChange}
                   />
                   <button className="add-button" onClick={handleUpdateItem}>
-                    Update
+                    변경
                   </button>
                 </div>
               ) : (
@@ -171,13 +230,13 @@ const Header = () => {
                     className="edit-button"
                     onClick={() => handleEditClick(playlist)}
                   >
-                    Edit
+                    <FaEdit />
                   </button>
                   <button
                     className="delete-button"
                     onClick={() => handleDeleteClick(playlist.id)}
                   >
-                    Delete
+                    <FaTrash />
                   </button>
                 </div>
               )}
@@ -185,13 +244,16 @@ const Header = () => {
           ))}
           <li>
             {showInput ? (
-              <div>
+              <div className="create-btn">
                 <input
+                  className="create-input"
                   type="text"
                   value={newItem}
                   onChange={handleInputChange}
                 />
-                <button onClick={handleAddItem}>Add</button>
+                <button className="create-add-btn" onClick={handleAddItem}>
+                  추가
+                </button>
               </div>
             ) : (
               <Link to="#" onClick={handleAddClick}>

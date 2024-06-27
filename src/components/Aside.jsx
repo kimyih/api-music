@@ -9,6 +9,7 @@ import {
   IoRepeat,
   IoShuffleOutline,
   IoTrash,
+  IoVolumeHigh, // 볼륨 아이콘 추가
 } from "react-icons/io5";
 import ReactPlayer from "react-player";
 
@@ -31,6 +32,8 @@ const Aside = () => {
     isRepeating,
     handleTrackEnd,
     removeTrackFromList,
+    volume,
+    setVolume, // 볼륨 상태 및 함수 사용
   } = useContext(MusicPlayerContext);
 
   const currentTrackRef = useRef(null);
@@ -70,6 +73,10 @@ const Aside = () => {
     }
   };
 
+  const handleVolumeChange = (event) => {
+    setVolume(parseFloat(event.target.value));
+  };
+
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
@@ -104,6 +111,7 @@ const Aside = () => {
                 onEnded={handleTrackEndModified}
                 onProgress={handleProgress}
                 onDuration={handleDuration}
+                volume={volume} // 볼륨 설정
               />
             )}
           </div>
@@ -161,6 +169,18 @@ const Aside = () => {
               <IoRepeat />
             </span>
           </div>
+        </div>
+
+        <div className="volume">
+          <IoVolumeHigh />
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={volume}
+            onChange={handleVolumeChange}
+          />
         </div>
       </div>
 
