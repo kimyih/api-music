@@ -17,7 +17,7 @@ const Home = () => {
               maxResults: 12,
               q: "플레이리스트",
               type: "video",
-              key: "AIzaSyC_9paGhSpgsO2dkNhB5uzHpRhGoXiINr4",
+              key: "AIzaSyCLA2Pqwzm-N_nU4LmqS9Dfo5nR5cdC7og",
             },
           }
         );

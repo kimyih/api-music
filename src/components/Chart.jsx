@@ -49,7 +49,7 @@ const Chart = ({
             q: query,
             type: "video",
             maxResults: 5,
-            key: "AIzaSyC_9paGhSpgsO2dkNhB5uzHpRhGoXiINr4",
+            key: "AIzaSyCLA2Pqwzm-N_nU4LmqS9Dfo5nR5cdC7og",
           },
         }
       );
