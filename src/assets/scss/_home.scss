@@ -1,37 +1,43 @@
 /* home.css */
 .video-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 30px;
 }
 
 .video-item {
-    width: calc(33.333% - 16px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    background: #fff;
-    text-align: center;
+  width: calc(33.333% - 16px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  text-align: center;
 }
 
 .video-item img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 .video-item h3 {
-    font-size: 1rem;
-    margin: 0.5rem 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .video-item p {
-    font-size: 0.875rem;
-    color: #666;
-    margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.recommended {
+  padding-left: 30px;
+  color: var(--pointColor);
+  justify-content: left;
 }

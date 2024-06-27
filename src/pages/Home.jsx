@@ -43,7 +43,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>추천 영상</h1>
+      <h1 className="recommended">추천 영상</h1>
       <div className="video-list">
         {videos.map((video) => (
           <div

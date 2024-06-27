@@ -78,9 +78,17 @@ const Aside = () => {
   };
 
   const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
-    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+
+    if (hours > 0) {
+      return `${hours}:${minutes < 10 ? "0" : ""}${minutes}:${
+        secs < 10 ? "0" : ""
+      }${secs}`;
+    } else {
+      return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+    }
   };
 
   const handleTrackEndModified = () => {
@@ -196,7 +204,9 @@ const Aside = () => {
               onClick={() => playTrack(index)}
               onMouseEnter={() => setActiveTrack(index)}
               onMouseLeave={() => setActiveTrack(null)}
-              className={index === currentTrackIndex ? "current-track" : ""}
+              className={`${
+                index === currentTrackIndex ? "current-track" : ""
+              } ${isPlaying && index === currentTrackIndex ? "playing" : ""}`}
             >
               <span
                 className="img"
