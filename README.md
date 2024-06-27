@@ -21,7 +21,10 @@
 
 #### [홈화면]
 
-![image](https://github.com/kimyih/api-music/assets/163376151/ac92aea3-8cfb-4d7b-b6b9-6399364b6540)
+![image](https://github.com/kimyih/api-music/assets/163376151/2b6921b7-02a9-489c-864b-c46cd0a0a036)
+
+-Y2k 컨셉의과 블로그 컨셉을 합친 플레이리스트를 제작해보았습니다. 
+
 ![image](https://github.com/kimyih/api-music/assets/163376151/faa37331-31be-4906-87d1-c22fe0907a04)
 
 
