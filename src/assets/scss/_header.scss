@@ -97,14 +97,18 @@
             }
 
             .edit-input-container {
-                display: flex;
-                align-items: center;
+                display: flex ; 
+                align-items: center ;
                 justify-content: center;
                 input {
                     flex-grow: 1;
-                    padding: 5px;
+                    padding: 10px ;
                     font-size: 16px;
                     margin-right: 10px;
+                }
+
+                .add-button {
+                    padding: 10px;
                 }
             }
         }
