@@ -30,8 +30,8 @@
 
 ![image](https://github.com/kimyih/api-music/assets/163376151/11b05241-65fe-4ee6-9cc0-8cf23679a74d)
 
--왼쪽 메뉴탭에는 나만의 플레이리스트인것을 보여주기 위해 나의 사진, 이름, 메모를 지정해서 저장할 수 있습니다.   
--새로 고침해도 바뀌지 않습니다.
+-왼쪽 메뉴탭에는 나만의 플레이리스트인것을 보여주기 위해 나의 사진, 이름, 메모를 지정해서 저장 가능.   
+-새로 고침해도 정보들이 바뀌지 않습니다.
 
 
 ![image](https://github.com/kimyih/api-music/assets/163376151/dd31160a-b940-4eee-95bf-b14b09449420)
@@ -60,6 +60,8 @@
 
 - My music 메뉴에는 상단 Select를 통해 JSON파일로 저장된 폴더들을 한번에 확인할 수 있고, 해당 폴더를 누르면 그 안에 있는 데이터가 오른쪽 플레이리스트에 자동으로 전송되며 리스트가 바뀌도록 기능 구현
 
+<br>
+
 ### 🛠️ 필요한 라이브러리 설치 순서
 
 ````bash
@@ -73,6 +75,8 @@
 - swiper 설치 `npm install swiper` : 이미지 슬라이드
 ````
 
+<br>
+
 - 필요한 라이브러리 한번에 설치할 때
 
 ```bash
@@ -82,6 +86,8 @@ npm i react-datepicker
 npm i react-toastify
 npm i react-modal
 ```
+
+<br>
 
 - src폴더에 폴더 추가 생성
 
@@ -93,6 +99,8 @@ npm i react-modal
 - pages
 - utils
 ````
+
+<br>
 
 - 작업 순서
 
@@ -124,6 +132,8 @@ npm i react-modal
 - Main.jsx파일에 `<HelmetProvider>` 태그 및 `<Helmet>` 태그 설정
 - pages의 파일에 `<Helmet>` 태그 내용 적용시키기
 ````
+
+<br>
 
 ### ⚡ 트러블 슈팅
 
